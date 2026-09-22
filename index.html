@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="The wedding programme for Dennis and Blessing — ceremony order of service, reception timeline, and hymn lyrics. Saturday, 26th September 2026.">
+<meta name="theme-color" content="#FBF6EA">
+<title>Dennis & Blessing — Wedding Programme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --olive:#6B7C45;
+    --olive-deep:#4E5C31;
+    --orange:#E8762B;
+    --gold:#C9A84C;
+    --ivory:#FBF6EA;
+    --paper:#FFFDF7;
+    --ink:#3A3324;
+    --ink-soft:#6B6250;
+    --hairline:rgba(107,124,69,0.28);
+    --shadow:0 18px 40px -22px rgba(58,51,36,0.35);
+    color-scheme: light;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 0%, rgba(201,168,76,0.10), transparent 45%),
+      radial-gradient(circle at 85% 10%, rgba(107,124,69,0.08), transparent 40%),
+      var(--ivory);
+    color:var(--ink);
+    font-family:"Lato", "Helvetica Neue", Arial, sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding-inline: 20px;
+    padding-block: 0 48px;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+  }
+
+  img{max-width:100%;}
+  [hidden]{display:none !important;}
+
+  h1,h2,h3,.display{
+    font-family:"Cormorant Garamond","Iowan Old Style","Georgia",serif;
+    font-weight:600;
+    color:var(--olive-deep);
+    text-wrap:balance;
+    margin:0;
+  }
+
+  a{color:var(--orange);}
+
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    position:relative;
+  }
+
+  /* ---------- sticky nav ---------- */
+  .navbar{
+    position:sticky;
+    top:env(safe-area-inset-top, 0px);
+    z-index:20;
+    max-width:560px;
+    margin:0 auto;
+    padding:10px 4px;
+    background:rgba(251,246,234,0.86);
+    backdrop-filter:blur(10px) saturate(140%);
+    -webkit-backdrop-filter:blur(10px) saturate(140%);
+    border-bottom:1px solid var(--hairline);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .navbar .mono{
+    flex:0 0 auto;
+    width:34px;height:34px;
+    border-radius:50%;
+    border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:15px;
+    color:var(--olive-deep);
+    background:var(--paper);
+  }
+  .navlinks{
+    display:flex;
+    gap:4px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    flex:1 1 auto;
+  }
+  .navlinks::-webkit-scrollbar{display:none;}
+  .navlinks a{
+    flex:0 0 auto;
+    text-decoration:none;
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:7px 11px;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:background .2s ease, color .2s ease;
+  }
+  .navlinks a.active{
+    background:var(--olive);
+    color:var(--paper);
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-block:38px 26px;
+    text-align:center;
+  }
+  .eyebrow{
+    font-size:12.5px;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--olive);
+    font-weight:700;
+  }
+  .names{
+    margin-top:14px;
+    font-size:clamp(2.5rem, 12vw, 3.4rem);
+    line-height:1.05;
+  }
+  .names .amp{
+    color:var(--orange);
+    font-style:italic;
+    font-weight:500;
+    padding-inline:0.08em;
+  }
+  .hero-date{
+    margin-top:10px;
+    font-family:"Lato",sans-serif;
+    font-size:15px;
+    letter-spacing:0.03em;
+    color:var(--ink-soft);
+  }
+  .hero-date strong{color:var(--ink);font-weight:700;}
+
+  .flourish{
+    display:flex;align-items:center;gap:10px;
+    margin-block:22px;
+    color:var(--gold);
+  }
+  .flourish::before,.flourish::after{
+    content:"";
+    height:1px;flex:1 1 auto;
+    background:linear-gradient(90deg, transparent, var(--gold));
+  }
+  .flourish::after{background:linear-gradient(90deg, var(--gold), transparent);}
+  .flourish svg{flex:0 0 auto;}
+
+  .hashtag{
+    display:inline-block;
+    margin-top:4px;
+    padding:8px 18px;
+    border:1px solid var(--gold);
+    border-radius:999px;
+    font-family:"Cormorant Garamond",serif;
+    font-weight:600;
+    font-style:italic;
+    font-size:16.5px;
+    color:var(--olive-deep);
+    background:var(--paper);
+    letter-spacing:0.01em;
+  }
+
+  /* ---------- photos ---------- */
+  .photo-frame{
+    padding:6px;
+    background:var(--paper);
+    border:1px solid var(--gold);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+  }
+  .photo-frame img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:14px;
+  }
+  .hero-photo{
+    margin-top:26px;
+  }
+  .hero-photo img{aspect-ratio:4/5;}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .gallery-grid .photo-frame{padding:5px;}
+  .gallery-grid img{aspect-ratio:3/4;}
+  .gallery-cap{
+    margin-top:16px;
+    text-align:center;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-size:15.5px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- card ---------- */
+  .card{
+    background:var(--paper);
+    border:1px solid var(--hairline);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:26px 22px;
+    margin-block:16px;
+  }
+
+  .section-head{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    margin-bottom:18px;
+    scroll-margin-top:70px;
+  }
+  .section-head h2{font-size:clamp(1.7rem,7vw,2.1rem);}
+  .section-head .sub{
+    font-size:12.5px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--olive);
+    font-weight:700;
+  }
+
+  /* ---------- welcome ---------- */
+  .welcome-text{
+    font-family:"Cormorant Garamond",serif;
+    font-size:19px;
+    font-style:italic;
+    color:var(--ink);
+    line-height:1.65;
+  }
+  .welcome-text::first-letter{
+    font-size:2.6em;
+    font-weight:700;
+    font-style:normal;
+    color:var(--orange);
+    float:left;
+    line-height:0.8;
+    padding-right:8px;
+    padding-top:4px;
+  }
+  .signoff{
+    margin-top:16px;
+    text-align:right;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    color:var(--olive-deep);
+    font-size:17px;
+  }
+
+  /* ---------- scripture ---------- */
+  .scripture{
+    text-align:center;
+    padding-block:6px;
+  }
+  .scripture q{
+    display:block;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(1.4rem,6.5vw,1.75rem);
+    color:var(--olive-deep);
+    quotes:"“" "”";
+    line-height:1.35;
+  }
+  .scripture cite{
+    display:block;
+    margin-top:12px;
+    font-style:normal;
+    font-size:12.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- venue block ---------- */
+  .venue{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+  }
+  .venue-icon{
+    flex:0 0 auto;
+    width:40px;height:40px;
+    border-radius:50%;
+    background:var(--olive);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .venue-body{flex:1 1 auto;min-width:0;}
+  .venue-name{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:700;
+    font-size:19px;
+    color:var(--ink);
+  }
+  .venue-addr{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .venue-meta{
+    margin-top:12px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+  }
+  .time-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(232,118,43,0.11);
+    color:var(--orange);
+    border:1px solid rgba(232,118,43,0.35);
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+    font-variant-numeric: tabular-nums;
+  }
+  .directions{
+    font-size:13px;
+    font-weight:700;
+    text-decoration:none;
+    border-bottom:1px solid currentColor;
+    padding-bottom:1px;
+  }
+
+  /* ---------- order of service ---------- */
+  .order-list{
+    list-style:none;
+    margin:0;padding:0;
+    display:flex;
+    flex-direction:column;
+  }
+  .order-list > li{
+    display:flex;
+    gap:14px;
+    padding-block:12px;
+    border-top:1px solid var(--hairline);
+  }
+  .order-list > li:first-child{border-top:none;padding-top:2px;}
+  .order-num{
+    flex:0 0 auto;
+    width:26px;height:26px;
+    border-radius:50%;
+    border:1px solid var(--gold);
+    color:var(--olive-deep);
+    font-family:"Lato",sans-serif;
+    font-weight:900;
+    font-size:12px;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .order-label{
+    font-size:16px;
+    color:var(--ink);
+    padding-top:2px;
+  }
+  .order-item.is-hymn{flex-direction:column;}
+  .order-item.is-hymn > .row{display:flex;gap:14px;width:100%;}
+
+  /* hymn details */
+  details.hymn{
+    margin-top:10px;
+    margin-left:40px;
+    border-left:2px solid var(--gold);
+    padding-left:14px;
+  }
+  details.hymn summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--olive);
+  }
+  details.hymn summary::-webkit-details-marker{display:none;}
+  details.hymn summary .chev{
+    display:inline-flex;
+    transition:transform .25s ease;
+    flex:0 0 auto;
+  }
+  details.hymn[open] summary .chev{transform:rotate(90deg);}
+  .hymn-lyrics{
+    padding-top:14px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:16.5px;
+    color:var(--ink);
+  }
+  .hymn-lyrics p{margin:0 0 14px 0;}
+  .hymn-lyrics .chorus{
+    font-style:italic;
+    color:var(--olive-deep);
+    padding-left:12px;
+    border-left:2px solid var(--orange);
+    margin-bottom:14px;
+  }
+  .hymn-lyrics .repeat-note{
+    display:block;
+    font-family:"Lato",sans-serif;
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+
+  /* ---------- ministers ---------- */
+  .ministers{
+    list-style:none;margin:0;padding:0;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0;
+  }
+  .ministers li{
+    padding:11px 0;
+    border-top:1px solid var(--hairline);
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+  }
+  .ministers li:first-child{border-top:none;}
+  .ministers .m-name{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:600;
+    font-size:16.5px;
+    color:var(--ink);
+  }
+  .ministers .m-role{
+    font-size:12px;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- reception timeline ---------- */
+  .timeline{
+    list-style:none;margin:0;padding:0;
+    position:relative;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:52px;
+    top:6px;bottom:6px;
+    width:1px;
+    background:var(--hairline);
+  }
+  .timeline li{
+    position:relative;
+    display:flex;
+    gap:16px;
+    padding-block:11px;
+  }
+  .t-time{
+    flex:0 0 40px;
+    text-align:right;
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--olive-deep);
+    font-variant-numeric: tabular-nums;
+    padding-top:2px;
+  }
+  .t-dot{
+    flex:0 0 auto;
+    width:9px;height:9px;
+    margin-top:6px;
+    border-radius:50%;
+    background:var(--gold);
+    border:2px solid var(--paper);
+    box-shadow:0 0 0 1px var(--gold);
+    position:relative;
+    z-index:1;
+  }
+  .t-label{
+    flex:1 1 auto;
+    font-size:15.5px;
+    padding-top:1px;
+  }
+
+  /* ---------- thanks ---------- */
+  .thanks-card{
+    border-left:3px solid var(--olive);
+    padding-left:19px;
+    font-size:15.5px;
+    color:var(--ink);
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    text-align:center;
+    padding-block:36px 10px;
+    color:var(--ink-soft);
+  }
+  footer .mono-lg{
+    width:52px;height:52px;
+    margin:0 auto 14px;
+    border-radius:50%;
+    border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:22px;
+    color:var(--olive-deep);
+    background:var(--paper);
+  }
+  footer .f-names{
+    font-family:"Cormorant Garamond",serif;
+    font-size:20px;
+    color:var(--olive-deep);
+  }
+  footer .f-hashtag{
+    margin-top:8px;
+    font-size:13px;
+    letter-spacing:0.05em;
+    color:var(--orange);
+    font-weight:700;
+  }
+  footer .f-date{
+    margin-top:4px;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+  }
+
+  a:focus-visible, summary:focus-visible, button:focus-visible{
+    outline:2px solid var(--orange);
+    outline-offset:2px;
+    border-radius:4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="mono">D&amp;B</div>
+  <div class="navlinks" id="navlinks">
+    <a href="#welcome" data-sec="welcome" class="active">Welcome</a>
+    <a href="#gallery" data-sec="gallery">Gallery</a>
+    <a href="#ceremony" data-sec="ceremony">Ceremony</a>
+    <a href="#reception" data-sec="reception">Reception</a>
+    <a href="#thanks" data-sec="thanks">Thanks</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero" id="welcome">
+    <div class="eyebrow">The Wedding Of</div>
+    <h1 class="names">Dennis <span class="amp">&amp;</span> Blessing</h1>
+    <div class="hero-date"><strong>Saturday, 26th September 2026</strong></div>
+
+    <div class="flourish" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 0 L9 5 L14 7 L9 9 L7 14 L5 9 L0 7 L5 5 Z" fill="currentColor"/></svg>
+    </div>
+
+    <span class="hashtag">#DennisGotHisBlessing2026</span>
+
+    <figure class="photo-frame hero-photo" style="margin-bottom:0;">
+      <img src="images/web/couple-hero.jpg" alt="Dennis and Blessing walking hand in hand" loading="eager">
+    </figure>
+
+    <div class="card" style="text-align:left; margin-top:28px;">
+      <p class="welcome-text">With hearts full of gratitude to God, we warmly welcome you to the celebration of our union. Today, we do not just exchange vows — we give thanks for a love that we believe was authored in heaven. Your presence here means the world to us. Thank you for choosing to share this moment with us. We pray that as you witness this joining, your own heart would be stirred to believe that God still writes beautiful stories.</p>
+      <p class="signoff">With love, Dennis &amp; Blessing</p>
+    </div>
+
+    <div class="scripture" style="margin-top:6px;">
+      <q>I have found the one whom my soul loves.</q>
+      <cite>Song of Solomon 3:4 · NIV</cite>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery">
+    <div class="section-head">
+      <span class="sub">In Frame</span>
+      <h2>A Few Favourites</h2>
+    </div>
+    <div class="gallery-grid">
+      <figure class="photo-frame">
+        <img src="images/web/couple-gold.jpg" alt="Dennis and Blessing dressed for their engagement shoot" loading="lazy">
+      </figure>
+      <figure class="photo-frame">
+        <img src="images/web/couple-pink.jpg" alt="Dennis and Blessing smiling together" loading="lazy">
+      </figure>
+    </div>
+    <p class="gallery-cap">Two hearts, one story, written by grace.</p>
+  </section>
+
+  <!-- ================= CEREMONY ================= -->
+  <section id="ceremony">
+    <div class="section-head">
+      <span class="sub">Part One</span>
+      <h2>The Ceremony</h2>
+    </div>
+
+    <div class="card">
+      <div class="venue">
+        <div class="venue-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2 L12 8 M12 8 L6 12 V22 H18 V12 L12 8 Z M9 22 V16 H15 V22 M8 4 H16" stroke="#FBF6EA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="venue-body">
+          <div class="venue-name">RCCG Chapel of Praise</div>
+          <div class="venue-addr">Region 27 HQ, Along Sani Abacha Expressway, Yenagoa</div>
+          <div class="venue-meta">
+            <span class="time-pill">10:30 AM prompt</span>
+            <a class="directions" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=RCCG+Chapel+of+Praise%2C+Region+27+HQ%2C+Along+Sani+Abacha+Expressway%2C+Yenagoa">Get directions →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1.25rem; margin-bottom:6px;">Order of Service</h3>
+      <ol class="order-list">
+        <li><span class="order-num">1</span><span class="order-label">Praise and Worship</span></li>
+
+        <li class="order-item is-hymn">
+          <div class="row"><span class="order-num">2</span><span class="order-label">Processional Hymn — <em>In Christ Alone</em></span></div>
+          <details class="hymn">
+            <summary><span class="chev">▸</span> View full lyrics</summary>
+            <div class="hymn-lyrics">
+              <p>In Christ alone, my hope is found<br>He is my light, my strength, my song<br>This Cornerstone, this solid ground<br>Firm through the fiercest drought and storm</p>
+              <p>What heights of love, what depths of peace<br>When fears are stilled, when strivings cease<br>My Comforter, my All in All<br>Here in the love of Christ I stand</p>
+              <p>In Christ alone, who took on flesh<br>Fullness of God in helpless babe<br>This gift of love and righteousness<br>Scorned by the ones He came to save</p>
+              <p>'Til on that cross as Jesus died<br>The wrath of God was satisfied<br>For every sin on Him was laid<br>Here in the death of Christ I live</p>
+              <p>There in the ground His body lay<br>Light of the world by darkness slain<br>Then bursting forth in glorious day<br>Up from the grave, He rose again<br>And as He stands in victory<br>Sin's curse has lost its grip on me<br>For I am His and He is mine<br>Bought with the precious blood of Christ</p>
+              <p>No guilt in life, no fear in death<br>This is the power of Christ in me<br>From life's first cry to final breath<br>Jesus commands my destiny<br>No power of hell, no scheme of man<br>Can ever pluck me from His hand<br>'Til He returns or calls me home<br>Here in the power of Christ I'll stand</p>
+            </div>
+          </details>
+        </li>
+
+        <li><span class="order-num">3</span><span class="order-label">Opening Prayer</span></li>
+        <li><span class="order-num">4</span><span class="order-label">Bible Reading</span></li>
+        <li><span class="order-num">5</span><span class="order-label">Joining</span></li>
+        <li><span class="order-num">6</span><span class="order-label">Choir Ministration</span></li>
+        <li><span class="order-num">7</span><span class="order-label">Sermon</span></li>
+        <li><span class="order-num">8</span><span class="order-label">Announcement</span></li>
+        <li><span class="order-num">9</span><span class="order-label">Signing of Marriage Register</span></li>
+        <li><span class="order-num">10</span><span class="order-label">Blessing of the Couple</span></li>
+
+        <li class="order-item is-hymn">
+          <div class="row"><span class="order-num">11</span><span class="order-label">Recessional Hymn — <em>To God Be the Glory</em></span></div>
+          <details class="hymn">
+            <summary><span class="chev">▸</span> View full lyrics</summary>
+            <div class="hymn-lyrics">
+              <p>To God be the glory, great things He hath done,<br>So loved He the world that He gave us His Son,<br>Who yielded His life our redemption to win,<br>And opened the life-gate that all may go in.</p>
+              <p class="chorus">Praise the Lord, praise the Lord,<br>Let the earth hear His voice;<br>Praise the Lord, praise the Lord,<br>Let the people rejoice;<br>Oh, come to the Father, through Jesus the Son,<br>And give Him the glory; great things He hath done.</p>
+              <p>Oh, perfect redemption, the purchase of blood,<br>To every believer the promise of God;<br>The vilest offender who truly believes,<br>That moment from Jesus a pardon receives.<span class="repeat-note">↳ Repeat Chorus</span></p>
+              <p>Great things He hath taught us, great things He hath done,<br>And great our rejoicing through Jesus the Son;<br>But purer, and higher, and greater will be<br>Our wonder, our transport when Jesus we see.<span class="repeat-note">↳ Repeat Chorus</span></p>
+            </div>
+          </details>
+        </li>
+
+        <li><span class="order-num">12</span><span class="order-label">Benediction</span></li>
+        <li><span class="order-num">13</span><span class="order-label">Photographs</span></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1.25rem; margin-bottom:10px;">Officiating Ministers</h3>
+      <ul class="ministers">
+        <li><span class="m-name">Pastor S. A. Folasayo</span><span class="m-role">— PICR</span></li>
+        <li><span class="m-name">Pastor John Obiwusi</span><span class="m-role">— APICR / PICP Bayelsa 4</span></li>
+        <li><span class="m-name">Pastor Ikechukwu Barnabas</span><span class="m-role">— RE</span></li>
+        <li><span class="m-name">Pastor Idowu J. Odesola</span><span class="m-role">— APICP Admin Bayelsa 5</span></li>
+        <li><span class="m-name">Pastor Temitope Adedeji</span><span class="m-role">— APICP Admin Bayelsa 4</span></li>
+        <li><span class="m-name">Pastor Fatokun Olumide J.</span></li>
+        <li><span class="m-name">Pastor Obiene Kumosuonyo</span></li>
+        <li><span class="m-name">A/P Margaret Opubiri</span></li>
+        <li><span class="m-name">A/P Oritsebemigho Ulori</span></li>
+        <li><span class="m-name">Dcn. Tarilate Victor</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= RECEPTION ================= -->
+  <section id="reception">
+    <div class="section-head">
+      <span class="sub">Part Two</span>
+      <h2>The Reception</h2>
+    </div>
+
+    <div class="card">
+      <div class="venue">
+        <div class="venue-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21c4-4.5 7-8.2 7-11.8A7 7 0 0 0 5 9.2C5 12.8 8 16.5 12 21Z" stroke="#FBF6EA" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.3" stroke="#FBF6EA" stroke-width="1.6"/></svg>
+        </div>
+        <div class="venue-body">
+          <div class="venue-name">Veroniya Event Center</div>
+          <div class="venue-addr">Silver Bird Road, Swali, Yenagoa</div>
+          <div class="venue-meta">
+            <span class="time-pill">1:00 PM prompt</span>
+            <a class="directions" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Veroniya+Event+Center%2C+Silver+Bird+Road%2C+Swali%2C+Yenagoa">Get directions →</a>
+          </div>
+          <div class="venue-addr" style="margin-top:8px;">Maximum four hours · ends by 5:00 PM</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1.25rem; margin-bottom:10px;">Order of Reception</h3>
+      <ul class="timeline">
+        <li><span class="t-time">1:00</span><span class="t-dot"></span><span class="t-label">Arrival of Guests</span></li>
+        <li><span class="t-time">1:30</span><span class="t-dot"></span><span class="t-label">Arrival of the Couple</span></li>
+        <li><span class="t-time">1:35</span><span class="t-dot"></span><span class="t-label">Opening Prayer</span></li>
+        <li><span class="t-time">1:40</span><span class="t-dot"></span><span class="t-label">Chairman's Opening Remarks</span></li>
+        <li><span class="t-time">1:50</span><span class="t-dot"></span><span class="t-label">Toast</span></li>
+        <li><span class="t-time">2:00</span><span class="t-dot"></span><span class="t-label">Cutting of the Cake</span></li>
+        <li><span class="t-time">2:10</span><span class="t-dot"></span><span class="t-label">Feed / Love Dance by the Couple</span></li>
+        <li><span class="t-time">2:20</span><span class="t-dot"></span><span class="t-label">Refreshment and Entertainment</span></li>
+        <li><span class="t-time">3:00</span><span class="t-dot"></span><span class="t-label">Groom's Entrance</span></li>
+        <li><span class="t-time">3:10</span><span class="t-dot"></span><span class="t-label">Bride's Entrance</span></li>
+        <li><span class="t-time">3:20</span><span class="t-dot"></span><span class="t-label">Couple Dance</span></li>
+        <li><span class="t-time">3:35</span><span class="t-dot"></span><span class="t-label">Gift Presentation</span></li>
+        <li><span class="t-time">4:30</span><span class="t-dot"></span><span class="t-label">Vote of Thanks</span></li>
+        <li><span class="t-time">4:50</span><span class="t-dot"></span><span class="t-label">Closing Prayer</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= THANKS ================= -->
+  <section id="thanks">
+    <div class="section-head">
+      <span class="sub">With Gratitude</span>
+      <h2>Vote of Thanks</h2>
+    </div>
+    <div class="card">
+      <p class="thanks-card">We are deeply grateful to God Almighty, whose faithfulness has brought us to this glorious day. To our parents and families, thank you for your prayers, sacrifices, and unwavering support. To our pastor and the officiating ministers, we are honoured by your presence and covering. To every guest who travelled near and far to celebrate with us, your love has not gone unnoticed. To all who contributed in any way, known and unknown, may God richly reward you. Today is beautiful because you are here.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="flourish" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 0 L9 5 L14 7 L9 9 L7 14 L5 9 L0 7 L5 5 Z" fill="currentColor"/></svg>
+    </div>
+    <div class="mono-lg">D&amp;B</div>
+    <div class="f-names">Dennis &amp; Blessing</div>
+    <div class="f-hashtag">#DennisGotHisBlessing2026</div>
+    <div class="f-date">26 · 09 · 2026</div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  try{
+    var links = Array.prototype.slice.call(document.querySelectorAll('#navlinks a'));
+    var sections = links.map(function(a){ return document.getElementById(a.dataset.sec); });
+    if(!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var id = entry.target.id;
+          links.forEach(function(a){ a.classList.toggle('active', a.dataset.sec === id); });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function(s){ if(s) io.observe(s); });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
