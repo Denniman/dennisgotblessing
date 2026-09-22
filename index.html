@@ -17,6 +17,7 @@
     --gold:#C9A84C;
     --ivory:#FBF6EA;
     --paper:#FFFDF7;
+    --paper-warm:#FFF6ED;
     --ink:#3A3324;
     --ink-soft:#6B6250;
     --hairline:rgba(107,124,69,0.28);
@@ -60,6 +61,8 @@
     margin:0 auto;
     position:relative;
   }
+
+  section + section{margin-top:58px;}
 
   /* ---------- sticky nav ---------- */
   .navbar{
@@ -117,7 +120,7 @@
 
   /* ---------- hero ---------- */
   .hero{
-    padding-block:38px 26px;
+    padding-block:38px 0;
     text-align:center;
   }
   .eyebrow{
@@ -162,29 +165,24 @@
 
   .hashtag{
     display:inline-block;
-    margin-top:4px;
-    padding:8px 18px;
-    border:1px solid var(--gold);
-    border-radius:999px;
     font-family:"Cormorant Garamond",serif;
     font-weight:600;
     font-style:italic;
-    font-size:16.5px;
+    font-size:17px;
     color:var(--olive-deep);
-    background:var(--paper);
     letter-spacing:0.01em;
+    padding-bottom:5px;
+    border-bottom:1px solid var(--gold);
   }
 
   /* ---------- photos ---------- */
   .photo-frame{
     display:block;
     width:100%;
-    padding:6px;
-    background:var(--paper);
-    border:1px solid var(--gold);
-    border-radius:20px;
-    box-shadow:var(--shadow);
     margin:0;
+    border:0;
+    background:transparent;
+    padding:0;
     cursor:default;
     font:inherit;
     -webkit-tap-highlight-color:transparent;
@@ -194,26 +192,110 @@
     width:100%;
     height:100%;
     object-fit:cover;
-    border-radius:14px;
   }
   .hero-photo{
-    margin-top:26px;
+    position:relative;
+    margin-top:30px;
+    padding:6px;
+    background:var(--paper);
+    border:1px solid var(--gold);
+    border-radius:20px;
+    box-shadow:var(--shadow);
   }
-  .hero-photo img{aspect-ratio:4/5;}
+  .hero-photo img{aspect-ratio:4/5; border-radius:14px;}
+  .hero-medallion{
+    position:absolute;
+    left:-16px;
+    bottom:-16px;
+    width:64px;height:64px;
+    border-radius:50%;
+    background:var(--ivory);
+    border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:22px;
+    color:var(--olive-deep);
+    box-shadow:var(--shadow);
+    z-index:2;
+  }
+
+  .welcome-block{
+    text-align:left;
+    margin-top:44px;
+    padding-top:26px;
+    border-top:1px solid var(--hairline);
+  }
+  .welcome-text{
+    font-family:"Cormorant Garamond",serif;
+    font-size:19px;
+    font-style:italic;
+    color:var(--ink);
+    line-height:1.65;
+  }
+  .welcome-text::first-letter{
+    font-size:2.6em;
+    font-weight:700;
+    font-style:normal;
+    color:var(--orange);
+    float:left;
+    line-height:0.8;
+    padding-right:8px;
+    padding-top:4px;
+  }
+  .signoff{
+    margin-top:16px;
+    text-align:right;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    color:var(--olive-deep);
+    font-size:17px;
+  }
+
+  /* ---------- scripture ---------- */
+  .scripture{
+    text-align:center;
+    margin-top:30px;
+  }
+  .scripture q{
+    display:block;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(1.4rem,6.5vw,1.75rem);
+    color:var(--olive-deep);
+    quotes:"“" "”";
+    line-height:1.35;
+  }
+  .scripture cite{
+    display:block;
+    margin-top:12px;
+    font-style:normal;
+    font-size:12.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- gallery ---------- */
   .gallery-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:12px;
+    gap:16px 12px;
   }
   .gallery-grid .photo-frame{
-    padding:5px;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 16px 32px -18px rgba(58,51,36,0.4);
     cursor:zoom-in;
     transition:transform .15s ease;
   }
+  .gallery-grid .photo-frame:nth-child(even){margin-top:26px;}
   .gallery-grid .photo-frame:active{transform:scale(0.97);}
   .gallery-grid img{aspect-ratio:3/4;}
   .gallery-cap{
-    margin-top:16px;
+    margin-top:24px;
     text-align:center;
     font-family:"Cormorant Garamond",serif;
     font-style:italic;
@@ -260,24 +342,14 @@
     cursor:pointer;
   }
 
-  /* ---------- card ---------- */
-  .card{
-    background:var(--paper);
-    border:1px solid var(--hairline);
-    border-radius:18px;
-    box-shadow:var(--shadow);
-    padding:26px 22px;
-    margin-block:16px;
-  }
-
+  /* ---------- section heads ---------- */
   .section-head{
     display:flex;
     flex-direction:column;
-    gap:4px;
-    margin-bottom:18px;
+    gap:6px;
+    margin-bottom:26px;
     scroll-margin-top:70px;
   }
-  .section-head h2{font-size:clamp(1.7rem,7vw,2.1rem);}
   .section-head .sub{
     font-size:12.5px;
     letter-spacing:0.18em;
@@ -285,57 +357,40 @@
     color:var(--olive);
     font-weight:700;
   }
-
-  /* ---------- welcome ---------- */
-  .welcome-text{
-    font-family:"Cormorant Garamond",serif;
-    font-size:19px;
-    font-style:italic;
-    color:var(--ink);
-    line-height:1.65;
+  .section-head h2{
+    font-size:clamp(1.7rem,7vw,2.1rem);
+    padding-bottom:12px;
   }
-  .welcome-text::first-letter{
-    font-size:2.6em;
-    font-weight:700;
-    font-style:normal;
-    color:var(--orange);
-    float:left;
-    line-height:0.8;
-    padding-right:8px;
-    padding-top:4px;
-  }
-  .signoff{
-    margin-top:16px;
-    text-align:right;
-    font-family:"Cormorant Garamond",serif;
-    font-style:italic;
-    color:var(--olive-deep);
-    font-size:17px;
-  }
-
-  /* ---------- scripture ---------- */
-  .scripture{
-    text-align:center;
-    padding-block:6px;
-  }
-  .scripture q{
+  .section-head h2::after{
+    content:"";
     display:block;
-    font-family:"Cormorant Garamond",serif;
-    font-style:italic;
-    font-weight:600;
-    font-size:clamp(1.4rem,6.5vw,1.75rem);
-    color:var(--olive-deep);
-    quotes:"“" "”";
-    line-height:1.35;
-  }
-  .scripture cite{
-    display:block;
+    width:46px;height:2px;
     margin-top:12px;
-    font-style:normal;
-    font-size:12.5px;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
+    background:var(--gold);
+  }
+
+  .subhead{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:600;
+    font-size:1.3rem;
+    color:var(--olive-deep);
+    margin:0 0 16px 0;
+  }
+  .subhead.on-dark{color:var(--ivory);}
+
+  .block{margin-top:44px;}
+
+  /* ---------- card (venue only) ---------- */
+  .card{
+    background:var(--paper);
+    border:1px solid var(--hairline);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:24px 22px;
+  }
+  .card.is-warm{
+    background:var(--paper-warm);
+    border-color:rgba(232,118,43,0.3);
   }
 
   /* ---------- venue block ---------- */
@@ -351,6 +406,7 @@
     background:var(--olive);
     display:flex;align-items:center;justify-content:center;
   }
+  .venue-icon.is-warm{background:var(--orange);}
   .venue-body{flex:1 1 auto;min-width:0;}
   .venue-name{
     font-family:"Cormorant Garamond",serif;
@@ -364,23 +420,17 @@
     margin-top:2px;
   }
   .venue-meta{
-    margin-top:12px;
+    margin-top:14px;
     display:flex;
     flex-wrap:wrap;
-    gap:8px;
+    gap:6px 16px;
     align-items:center;
   }
-  .time-pill{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    background:rgba(232,118,43,0.11);
-    color:var(--orange);
-    border:1px solid rgba(232,118,43,0.35);
-    padding:6px 12px;
-    border-radius:999px;
-    font-size:13px;
+  .time-tag{
     font-weight:700;
+    font-size:14px;
+    color:var(--orange);
+    letter-spacing:0.01em;
     font-variant-numeric: tabular-nums;
   }
   .directions{
@@ -400,36 +450,32 @@
   }
   .order-list > li{
     display:flex;
+    align-items:baseline;
     gap:14px;
-    padding-block:12px;
+    padding-block:14px;
     border-top:1px solid var(--hairline);
   }
   .order-list > li:first-child{border-top:none;padding-top:2px;}
   .order-num{
-    flex:0 0 auto;
-    width:26px;height:26px;
-    border-radius:50%;
-    border:1px solid var(--gold);
-    color:var(--olive-deep);
-    font-family:"Lato",sans-serif;
-    font-weight:900;
-    font-size:12px;
-    display:flex;align-items:center;justify-content:center;
-    margin-top:2px;
+    flex:0 0 40px;
+    font-family:"Cormorant Garamond",serif;
+    font-weight:600;
+    font-style:italic;
+    font-size:28px;
+    color:rgba(107,124,69,0.4);
     font-variant-numeric: tabular-nums;
   }
   .order-label{
     font-size:16px;
     color:var(--ink);
-    padding-top:2px;
   }
-  .order-item.is-hymn{flex-direction:column;}
-  .order-item.is-hymn > .row{display:flex;gap:14px;width:100%;}
+  .order-item.is-hymn{flex-direction:column; align-items:stretch;}
+  .order-item.is-hymn > .row{display:flex;align-items:baseline;gap:14px;width:100%;}
 
   /* hymn details */
   details.hymn{
     margin-top:10px;
-    margin-left:40px;
+    margin-left:54px;
     border-left:2px solid var(--gold);
     padding-left:14px;
   }
@@ -484,13 +530,13 @@
     gap:0;
   }
   .ministers li{
-    padding:11px 0;
+    padding:12px 0;
     border-top:1px solid var(--hairline);
     display:flex;
     gap:10px;
     align-items:baseline;
   }
-  .ministers li:first-child{border-top:none;}
+  .ministers li:first-child{border-top:none;padding-top:0;}
   .ministers .m-name{
     font-family:"Cormorant Garamond",serif;
     font-weight:600;
@@ -503,7 +549,14 @@
     letter-spacing:0.02em;
   }
 
-  /* ---------- reception timeline ---------- */
+  /* ---------- reception timeline (color block) ---------- */
+  .timeline-panel{
+    margin-top:44px;
+    background:var(--olive-deep);
+    border-radius:22px;
+    padding:30px 22px 26px;
+    box-shadow:var(--shadow);
+  }
   .timeline{
     list-style:none;margin:0;padding:0;
     position:relative;
@@ -514,7 +567,7 @@
     left:52px;
     top:6px;bottom:6px;
     width:1px;
-    background:var(--hairline);
+    background:rgba(251,246,234,0.22);
   }
   .timeline li{
     position:relative;
@@ -527,7 +580,7 @@
     text-align:right;
     font-size:12.5px;
     font-weight:700;
-    color:var(--olive-deep);
+    color:var(--gold);
     font-variant-numeric: tabular-nums;
     padding-top:2px;
   }
@@ -536,9 +589,9 @@
     width:9px;height:9px;
     margin-top:6px;
     border-radius:50%;
-    background:var(--gold);
-    border:2px solid var(--paper);
-    box-shadow:0 0 0 1px var(--gold);
+    background:var(--orange);
+    border:2px solid var(--olive-deep);
+    box-shadow:0 0 0 1px var(--orange);
     position:relative;
     z-index:1;
   }
@@ -546,20 +599,34 @@
     flex:1 1 auto;
     font-size:15.5px;
     padding-top:1px;
+    color:rgba(251,246,234,0.94);
   }
 
   /* ---------- thanks ---------- */
-  .thanks-card{
-    border-left:3px solid var(--olive);
-    padding-left:19px;
-    font-size:15.5px;
+  .thanks-text{
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-size:19px;
+    line-height:1.65;
     color:var(--ink);
+    border-left:3px solid var(--olive);
+    padding-left:20px;
+  }
+  .thanks-text::first-letter{
+    font-size:2.4em;
+    font-weight:700;
+    font-style:normal;
+    color:var(--orange);
+    float:left;
+    line-height:0.8;
+    padding-right:8px;
+    padding-top:4px;
   }
 
   /* ---------- footer ---------- */
   footer{
     text-align:center;
-    padding-block:36px 10px;
+    padding-block:44px 10px;
     color:var(--ink-soft);
   }
   footer .mono-lg{
@@ -580,15 +647,12 @@
     font-size:20px;
     color:var(--olive-deep);
   }
-  footer .f-hashtag{
-    margin-top:8px;
-    font-size:13px;
-    letter-spacing:0.05em;
-    color:var(--orange);
-    font-weight:700;
+  footer .hashtag{
+    margin-top:10px;
+    font-size:15px;
   }
   footer .f-date{
-    margin-top:4px;
+    margin-top:14px;
     font-size:12px;
     letter-spacing:0.12em;
     text-transform:uppercase;
@@ -622,7 +686,7 @@
 
   <section class="hero" id="welcome">
     <div class="eyebrow">The Wedding Of</div>
-    <h1 class="names">Dennis <span class="amp">&amp;</span> Blessing</h1>
+    <h1 class="names">Blessing <span class="amp">&amp;</span> Dennis</h1>
     <div class="hero-date"><strong>Saturday, 26th September 2026</strong></div>
 
     <div class="flourish" aria-hidden="true">
@@ -631,16 +695,17 @@
 
     <span class="hashtag">#DennisGotHisBlessing2026</span>
 
-    <figure class="photo-frame hero-photo" style="margin-bottom:0;">
+    <figure class="photo-frame hero-photo">
       <img src="images/web/couple-hero.jpg" alt="Dennis and Blessing walking hand in hand" loading="eager">
+      <span class="hero-medallion" aria-hidden="true">D&amp;B</span>
     </figure>
 
-    <div class="card" style="text-align:left; margin-top:28px;">
+    <div class="welcome-block">
       <p class="welcome-text">With hearts full of gratitude to God, we warmly welcome you to the celebration of our union. Today, we do not just exchange vows — we give thanks for a love that we believe was authored in heaven. Your presence here means the world to us. Thank you for choosing to share this moment with us. We pray that as you witness this joining, your own heart would be stirred to believe that God still writes beautiful stories.</p>
       <p class="signoff">With love, Dennis &amp; Blessing</p>
     </div>
 
-    <div class="scripture" style="margin-top:6px;">
+    <div class="scripture">
       <q>I have found the one whom my soul loves.</q>
       <cite>Song of Solomon 3:4 · NIV</cite>
     </div>
@@ -691,15 +756,15 @@
           <div class="venue-name">RCCG Chapel of Praise</div>
           <div class="venue-addr">Region 27 HQ, Along Sani Abacha Expressway, Yenagoa</div>
           <div class="venue-meta">
-            <span class="time-pill">10:30 AM prompt</span>
+            <span class="time-tag">10:30 AM prompt</span>
             <a class="directions" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=RCCG+Chapel+of+Praise%2C+Region+27+HQ%2C+Along+Sani+Abacha+Expressway%2C+Yenagoa">Get directions →</a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="card">
-      <h3 style="font-size:1.25rem; margin-bottom:6px;">Order of Service</h3>
+    <div class="block">
+      <h3 class="subhead">Order of Service</h3>
       <ol class="order-list">
         <li><span class="order-num">1</span><span class="order-label">Praise and Worship</span></li>
 
@@ -745,8 +810,8 @@
       </ol>
     </div>
 
-    <div class="card">
-      <h3 style="font-size:1.25rem; margin-bottom:10px;">Officiating Ministers</h3>
+    <div class="block">
+      <h3 class="subhead">Officiating Ministers</h3>
       <ul class="ministers">
         <li><span class="m-name">Pastor S. A. Folasayo</span><span class="m-role">— PICR</span></li>
         <li><span class="m-name">Pastor John Obiwusi</span><span class="m-role">— APICR / PICP Bayelsa 4</span></li>
@@ -770,16 +835,16 @@
       <h2>The Reception</h2>
     </div>
 
-    <div class="card">
+    <div class="card is-warm">
       <div class="venue">
-        <div class="venue-icon" aria-hidden="true">
+        <div class="venue-icon is-warm" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21c4-4.5 7-8.2 7-11.8A7 7 0 0 0 5 9.2C5 12.8 8 16.5 12 21Z" stroke="#FBF6EA" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.3" stroke="#FBF6EA" stroke-width="1.6"/></svg>
         </div>
         <div class="venue-body">
           <div class="venue-name">Veroniya Event Center</div>
           <div class="venue-addr">Silver Bird Road, Swali, Yenagoa</div>
           <div class="venue-meta">
-            <span class="time-pill">1:00 PM prompt</span>
+            <span class="time-tag">1:00 PM prompt</span>
             <a class="directions" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Veroniya+Event+Center%2C+Silver+Bird+Road%2C+Swali%2C+Yenagoa">Get directions →</a>
           </div>
           <div class="venue-addr" style="margin-top:8px;">Maximum four hours · ends by 5:00 PM</div>
@@ -787,19 +852,19 @@
       </div>
     </div>
 
-    <div class="card">
-      <h3 style="font-size:1.25rem; margin-bottom:10px;">Order of Reception</h3>
+    <div class="timeline-panel">
+      <h3 class="subhead on-dark">Order of Reception</h3>
       <ul class="timeline">
         <li><span class="t-time">1:00</span><span class="t-dot"></span><span class="t-label">Arrival of Guests</span></li>
         <li><span class="t-time">1:30</span><span class="t-dot"></span><span class="t-label">Arrival of the Couple</span></li>
-        <li><span class="t-time">1:35</span><span class="t-dot"></span><span class="t-label">Opening Prayer</span></li>
-        <li><span class="t-time">1:40</span><span class="t-dot"></span><span class="t-label">Chairman's Opening Remarks</span></li>
-        <li><span class="t-time">1:50</span><span class="t-dot"></span><span class="t-label">Toast</span></li>
-        <li><span class="t-time">2:00</span><span class="t-dot"></span><span class="t-label">Cutting of the Cake</span></li>
-        <li><span class="t-time">2:10</span><span class="t-dot"></span><span class="t-label">Feed / Love Dance by the Couple</span></li>
-        <li><span class="t-time">2:20</span><span class="t-dot"></span><span class="t-label">Refreshment and Entertainment</span></li>
-        <li><span class="t-time">3:00</span><span class="t-dot"></span><span class="t-label">Groom's Entrance</span></li>
-        <li><span class="t-time">3:10</span><span class="t-dot"></span><span class="t-label">Bride's Entrance</span></li>
+        <li><span class="t-time">1:45</span><span class="t-dot"></span><span class="t-label">Opening Prayer</span></li>
+        <li><span class="t-time">1:50</span><span class="t-dot"></span><span class="t-label">Chairman's Opening Remarks</span></li>
+        <li><span class="t-time">2:00</span><span class="t-dot"></span><span class="t-label">Toast</span></li>
+        <li><span class="t-time">2:10</span><span class="t-dot"></span><span class="t-label">Cutting of the Cake</span></li>
+        <li><span class="t-time">2:20</span><span class="t-dot"></span><span class="t-label">Feed / Love Dance by the Couple</span></li>
+        <li><span class="t-time">2:30</span><span class="t-dot"></span><span class="t-label">Refreshment and Entertainment</span></li>
+        <li><span class="t-time">2:55</span><span class="t-dot"></span><span class="t-label">Groom's Entrance</span></li>
+        <li><span class="t-time">3:05</span><span class="t-dot"></span><span class="t-label">Bride's Entrance</span></li>
         <li><span class="t-time">3:20</span><span class="t-dot"></span><span class="t-label">Couple Dance</span></li>
         <li><span class="t-time">3:35</span><span class="t-dot"></span><span class="t-label">Gift Presentation</span></li>
         <li><span class="t-time">4:30</span><span class="t-dot"></span><span class="t-label">Vote of Thanks</span></li>
@@ -814,9 +879,7 @@
       <span class="sub">With Gratitude</span>
       <h2>Vote of Thanks</h2>
     </div>
-    <div class="card">
-      <p class="thanks-card">We are deeply grateful to God Almighty, whose faithfulness has brought us to this glorious day. To our parents and families, thank you for your prayers, sacrifices, and unwavering support. To our pastor and the officiating ministers, we are honoured by your presence and covering. To every guest who travelled near and far to celebrate with us, your love has not gone unnoticed. To all who contributed in any way, known and unknown, may God richly reward you. Today is beautiful because you are here.</p>
-    </div>
+    <p class="thanks-text">We are deeply grateful to God Almighty, whose faithfulness has brought us to this glorious day. To our parents and families, thank you for your prayers, sacrifices, and unwavering support. To our pastor and the officiating ministers, we are honoured by your presence and covering. To every guest who travelled near and far to celebrate with us, your love has not gone unnoticed. To all who contributed in any way, known and unknown, may God richly reward you. Today is beautiful because you are here.</p>
   </section>
 
   <footer>
@@ -825,7 +888,7 @@
     </div>
     <div class="mono-lg">D&amp;B</div>
     <div class="f-names">Dennis &amp; Blessing</div>
-    <div class="f-hashtag">#DennisGotHisBlessing2026</div>
+    <span class="hashtag">#DennisGotHisBlessing2026</span>
     <div class="f-date">26 · 09 · 2026</div>
   </footer>
 
