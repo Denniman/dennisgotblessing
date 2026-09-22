@@ -177,11 +177,17 @@
 
   /* ---------- photos ---------- */
   .photo-frame{
+    display:block;
+    width:100%;
     padding:6px;
     background:var(--paper);
     border:1px solid var(--gold);
     border-radius:20px;
     box-shadow:var(--shadow);
+    margin:0;
+    cursor:default;
+    font:inherit;
+    -webkit-tap-highlight-color:transparent;
   }
   .photo-frame img{
     display:block;
@@ -199,7 +205,12 @@
     grid-template-columns:1fr 1fr;
     gap:12px;
   }
-  .gallery-grid .photo-frame{padding:5px;}
+  .gallery-grid .photo-frame{
+    padding:5px;
+    cursor:zoom-in;
+    transition:transform .15s ease;
+  }
+  .gallery-grid .photo-frame:active{transform:scale(0.97);}
   .gallery-grid img{aspect-ratio:3/4;}
   .gallery-cap{
     margin-top:16px;
@@ -208,6 +219,45 @@
     font-style:italic;
     font-size:15.5px;
     color:var(--ink-soft);
+  }
+
+  /* ---------- lightbox ---------- */
+  .lightbox{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    padding-top:calc(24px + env(safe-area-inset-top, 0px));
+    padding-bottom:calc(24px + env(safe-area-inset-bottom, 0px));
+    background:rgba(58,51,36,0.92);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease;
+  }
+  .lightbox.is-open{opacity:1; pointer-events:auto;}
+  .lightbox img{
+    max-width:100%;
+    max-height:100%;
+    border-radius:10px;
+    box-shadow:0 24px 60px -20px rgba(0,0,0,0.6);
+  }
+  .lightbox-close{
+    position:absolute;
+    top:calc(16px + env(safe-area-inset-top, 0px));
+    right:16px;
+    width:40px;height:40px;
+    border-radius:50%;
+    border:1px solid rgba(251,246,234,0.4);
+    background:rgba(58,51,36,0.6);
+    color:var(--ivory);
+    font-family:"Lato",sans-serif;
+    font-size:20px;
+    line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
   }
 
   /* ---------- card ---------- */
@@ -603,14 +653,26 @@
       <h2>A Few Favourites</h2>
     </div>
     <div class="gallery-grid">
-      <figure class="photo-frame">
+      <button type="button" class="photo-frame" data-lightbox-open>
         <img src="images/web/couple-gold.jpg" alt="Dennis and Blessing dressed for their engagement shoot" loading="lazy">
-      </figure>
-      <figure class="photo-frame">
+      </button>
+      <button type="button" class="photo-frame" data-lightbox-open>
         <img src="images/web/couple-pink.jpg" alt="Dennis and Blessing smiling together" loading="lazy">
-      </figure>
+      </button>
+      <button type="button" class="photo-frame" data-lightbox-open>
+        <img src="images/web/bride-portrait.jpg" alt="Blessing, the bride" loading="lazy">
+      </button>
+      <button type="button" class="photo-frame" data-lightbox-open>
+        <img src="images/web/groom-portrait.jpg" alt="Dennis, the groom" loading="lazy">
+      </button>
+      <button type="button" class="photo-frame" data-lightbox-open>
+        <img src="images/web/couple-handkiss.jpg" alt="Dennis kissing Blessing's hand" loading="lazy">
+      </button>
+      <button type="button" class="photo-frame" data-lightbox-open>
+        <img src="images/web/couple-candid.jpg" alt="Dennis and Blessing laughing together" loading="lazy">
+      </button>
     </div>
-    <p class="gallery-cap">Two hearts, one story, written by grace.</p>
+    <p class="gallery-cap">Tap a photo for a closer look · two hearts, one story, written by grace.</p>
   </section>
 
   <!-- ================= CEREMONY ================= -->
@@ -695,6 +757,7 @@
         <li><span class="m-name">Pastor Obiene Kumosuonyo</span></li>
         <li><span class="m-name">A/P Margaret Opubiri</span></li>
         <li><span class="m-name">A/P Oritsebemigho Ulori</span></li>
+        <li><span class="m-name">A/P Ayodele Asogba</span></li>
         <li><span class="m-name">Dcn. Tarilate Victor</span></li>
       </ul>
     </div>
@@ -768,21 +831,63 @@
 
 </div>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close photo">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
 <script>
 (function(){
   try{
     var links = Array.prototype.slice.call(document.querySelectorAll('#navlinks a'));
     var sections = links.map(function(a){ return document.getElementById(a.dataset.sec); });
-    if(!('IntersectionObserver' in window)) return;
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          var id = entry.target.id;
-          links.forEach(function(a){ a.classList.toggle('active', a.dataset.sec === id); });
-        }
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            var id = entry.target.id;
+            links.forEach(function(a){ a.classList.toggle('active', a.dataset.sec === id); });
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+      sections.forEach(function(s){ if(s) io.observe(s); });
+    }
+  }catch(e){}
+})();
+
+(function(){
+  try{
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+    var closeBtn = document.getElementById('lightboxClose');
+    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-open]'));
+
+    function openLightbox(img){
+      lightboxImg.src = img.currentSrc || img.src;
+      lightboxImg.alt = img.alt || '';
+      lightbox.hidden = false;
+      requestAnimationFrame(function(){ lightbox.classList.add('is-open'); });
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+      setTimeout(function(){ lightbox.hidden = true; lightboxImg.src = ''; }, 200);
+    }
+
+    triggers.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var img = btn.querySelector('img');
+        if(img) openLightbox(img);
       });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-    sections.forEach(function(s){ if(s) io.observe(s); });
+    });
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e){
+      if(e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+    });
   }catch(e){}
 })();
 </script>
