@@ -27,6 +27,7 @@
 
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
   body{
     background:
       radial-gradient(circle at 15% 0%, rgba(201,168,76,0.10), transparent 45%),
@@ -79,6 +80,11 @@
     display:flex;
     align-items:center;
     gap:10px;
+    box-shadow:0 8px 20px -14px rgba(58,51,36,0);
+    transition:box-shadow .25s ease;
+  }
+  .navbar.is-scrolled{
+    box-shadow:0 8px 20px -14px rgba(58,51,36,0.45);
   }
   .navbar .mono{
     flex:0 0 auto;
@@ -94,6 +100,7 @@
     background:var(--paper);
   }
   .navlinks{
+    position:relative;
     display:flex;
     gap:4px;
     overflow-x:auto;
@@ -101,7 +108,22 @@
     flex:1 1 auto;
   }
   .navlinks::-webkit-scrollbar{display:none;}
+  .nav-indicator{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    border-radius:999px;
+    background:var(--olive);
+    transition:transform .32s cubic-bezier(.4,0,.2,1), width .32s cubic-bezier(.4,0,.2,1);
+    z-index:0;
+    pointer-events:none;
+    opacity:0;
+  }
+  .nav-indicator.is-ready{opacity:1;}
   .navlinks a{
+    position:relative;
+    z-index:1;
     flex:0 0 auto;
     text-decoration:none;
     font-size:12.5px;
@@ -111,12 +133,12 @@
     padding:7px 11px;
     border-radius:999px;
     white-space:nowrap;
-    transition:background .2s ease, color .2s ease;
+    transition:color .2s ease, transform .15s ease;
   }
   .navlinks a.active{
-    background:var(--olive);
     color:var(--paper);
   }
+  .navlinks a:active{transform:scale(0.94);}
 
   /* ---------- hero ---------- */
   .hero{
@@ -325,7 +347,10 @@
     max-height:100%;
     border-radius:10px;
     box-shadow:0 24px 60px -20px rgba(0,0,0,0.6);
+    transform:scale(0.94);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1);
   }
+  .lightbox.is-open img{transform:scale(1);}
   .lightbox-close{
     position:absolute;
     top:calc(16px + env(safe-area-inset-top, 0px));
@@ -340,7 +365,9 @@
     line-height:1;
     display:flex;align-items:center;justify-content:center;
     cursor:pointer;
+    transition:transform .15s ease;
   }
+  .lightbox-close:active{transform:scale(0.88);}
 
   /* ---------- section heads ---------- */
   .section-head{
@@ -434,12 +461,15 @@
     font-variant-numeric: tabular-nums;
   }
   .directions{
+    display:inline-block;
     font-size:13px;
     font-weight:700;
     text-decoration:none;
     border-bottom:1px solid currentColor;
     padding-bottom:1px;
+    transition:transform .15s ease, opacity .15s ease;
   }
+  .directions:active{transform:scale(0.96); opacity:0.75;}
 
   /* ---------- order of service ---------- */
   .order-list{
@@ -472,14 +502,14 @@
   .order-item.is-hymn{flex-direction:column; align-items:stretch;}
   .order-item.is-hymn > .row{display:flex;align-items:baseline;gap:14px;width:100%;}
 
-  /* hymn details */
-  details.hymn{
+  /* collapsible sub-lists (hymn lyrics, photograph order) */
+  details.sublist{
     margin-top:10px;
     margin-left:54px;
     border-left:2px solid var(--gold);
     padding-left:14px;
   }
-  details.hymn summary{
+  details.sublist summary{
     list-style:none;
     cursor:pointer;
     display:flex;
@@ -490,16 +520,26 @@
     text-transform:uppercase;
     font-weight:700;
     color:var(--olive);
+    transition:opacity .15s ease;
   }
-  details.hymn summary::-webkit-details-marker{display:none;}
-  details.hymn summary .chev{
+  details.sublist summary:active{opacity:0.6;}
+  details.sublist summary::-webkit-details-marker{display:none;}
+  details.sublist summary .chev{
     display:inline-flex;
     transition:transform .25s ease;
     flex:0 0 auto;
   }
-  details.hymn[open] summary .chev{transform:rotate(90deg);}
+  details.sublist[open] summary .chev{transform:rotate(90deg);}
+  .photo-order-body{
+    padding-top:14px;
+    overflow:hidden;
+  }
+  .photo-order-body .order-num{font-size:19px;}
+  .photo-order-body .order-label{font-size:15px;}
+  .photo-order-body .order-list > li{padding-block:10px;}
   .hymn-lyrics{
     padding-top:14px;
+    overflow:hidden;
     font-family:"Cormorant Garamond",serif;
     font-size:16.5px;
     color:var(--ink);
@@ -665,6 +705,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
     *{transition:none !important;}
   }
 </style>
@@ -674,6 +715,7 @@
 <nav class="navbar" id="navbar">
   <div class="mono">D&amp;B</div>
   <div class="navlinks" id="navlinks">
+    <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
     <a href="#welcome" data-sec="welcome" class="active">Welcome</a>
     <a href="#gallery" data-sec="gallery">Gallery</a>
     <a href="#ceremony" data-sec="ceremony">Ceremony</a>
@@ -770,7 +812,7 @@
 
         <li class="order-item is-hymn">
           <div class="row"><span class="order-num">2</span><span class="order-label">Processional Hymn — <em>In Christ Alone</em></span></div>
-          <details class="hymn">
+          <details class="sublist">
             <summary><span class="chev">▸</span> View full lyrics</summary>
             <div class="hymn-lyrics">
               <p>In Christ alone, my hope is found<br>He is my light, my strength, my song<br>This Cornerstone, this solid ground<br>Firm through the fiercest drought and storm</p>
@@ -794,7 +836,7 @@
 
         <li class="order-item is-hymn">
           <div class="row"><span class="order-num">11</span><span class="order-label">Recessional Hymn — <em>To God Be the Glory</em></span></div>
-          <details class="hymn">
+          <details class="sublist">
             <summary><span class="chev">▸</span> View full lyrics</summary>
             <div class="hymn-lyrics">
               <p>To God be the glory, great things He hath done,<br>So loved He the world that He gave us His Son,<br>Who yielded His life our redemption to win,<br>And opened the life-gate that all may go in.</p>
@@ -806,7 +848,34 @@
         </li>
 
         <li><span class="order-num">12</span><span class="order-label">Benediction</span></li>
-        <li><span class="order-num">13</span><span class="order-label">Photographs</span></li>
+
+        <li class="order-item is-hymn">
+          <div class="row"><span class="order-num">13</span><span class="order-label">Photographs</span></div>
+          <details class="sublist">
+            <summary><span class="chev">▸</span> View photograph order</summary>
+            <div class="photo-order-body">
+              <ol class="order-list">
+                <li><span class="order-num">1</span><span class="order-label">Couple with Officiating Ministers</span></li>
+                <li><span class="order-num">2</span><span class="order-label">Couple with Bride's Parents</span></li>
+                <li><span class="order-num">3</span><span class="order-label">Couple with Groom's Parents</span></li>
+                <li><span class="order-num">4</span><span class="order-label">Couple with Bride's Family</span></li>
+                <li><span class="order-num">5</span><span class="order-label">Couple with Groom's Family</span></li>
+                <li><span class="order-num">6</span><span class="order-label">Couple with Bestman and Maid of Honour</span></li>
+                <li><span class="order-num">7</span><span class="order-label">Couple with RCCG Divine Power Parish</span></li>
+                <li><span class="order-num">8</span><span class="order-label">Couple with RCCG Zion Gate Parish</span></li>
+                <li><span class="order-num">9</span><span class="order-label">Couple with RCCG Faith Arena Parish</span></li>
+                <li><span class="order-num">10</span><span class="order-label">Couple with Sunday School Department (Divine Power and Zion Gate)</span></li>
+                <li><span class="order-num">11</span><span class="order-label">Couple with Media Department</span></li>
+                <li><span class="order-num">12</span><span class="order-label">Couple with Vision Driven Multipurpose Cooperative Society</span></li>
+                <li><span class="order-num">13</span><span class="order-label">Couple with Librarians</span></li>
+                <li><span class="order-num">14</span><span class="order-label">Couple with LIS Pioneers</span></li>
+                <li><span class="order-num">15</span><span class="order-label">Couple with EDU Class of 2024</span></li>
+                <li><span class="order-num">16</span><span class="order-label">Couple with NDU Political Science Class of 2015</span></li>
+                <li><span class="order-num">17</span><span class="order-label">Couple with Friends and Wellwishers</span></li>
+              </ol>
+            </div>
+          </details>
+        </li>
       </ol>
     </div>
 
@@ -847,7 +916,6 @@
             <span class="time-tag">1:00 PM prompt</span>
             <a class="directions" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Veroniya+Event+Center%2C+Silver+Bird+Road%2C+Swali%2C+Yenagoa">Get directions →</a>
           </div>
-          <div class="venue-addr" style="margin-top:8px;">Maximum four hours · ends by 5:00 PM</div>
         </div>
       </div>
     </div>
@@ -902,19 +970,114 @@
 <script>
 (function(){
   try{
+    var navlinks = document.getElementById('navlinks');
+    var indicator = document.getElementById('navIndicator');
     var links = Array.prototype.slice.call(document.querySelectorAll('#navlinks a'));
     var sections = links.map(function(a){ return document.getElementById(a.dataset.sec); });
+
+    function moveIndicator(link){
+      if(!indicator || !link) return;
+      indicator.style.width = link.offsetWidth + 'px';
+      indicator.style.transform = 'translateX(' + link.offsetLeft + 'px)';
+      indicator.classList.add('is-ready');
+    }
+    function setActive(id){
+      links.forEach(function(a){ a.classList.toggle('active', a.dataset.sec === id); });
+      var activeLink = links.filter(function(a){ return a.dataset.sec === id; })[0];
+      if(activeLink){
+        moveIndicator(activeLink);
+        activeLink.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+      }
+    }
+
+    var initialActive = links.filter(function(a){ return a.classList.contains('active'); })[0] || links[0];
+    moveIndicator(initialActive);
+
     if('IntersectionObserver' in window){
       var io = new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
-          if(entry.isIntersecting){
-            var id = entry.target.id;
-            links.forEach(function(a){ a.classList.toggle('active', a.dataset.sec === id); });
-          }
+          if(entry.isIntersecting) setActive(entry.target.id);
         });
       }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
       sections.forEach(function(s){ if(s) io.observe(s); });
     }
+
+    window.addEventListener('resize', function(){
+      var current = links.filter(function(a){ return a.classList.contains('active'); })[0];
+      if(current) moveIndicator(current);
+    });
+  }catch(e){}
+})();
+
+(function(){
+  try{
+    var navbar = document.getElementById('navbar');
+    function onScroll(){
+      navbar.classList.toggle('is-scrolled', window.scrollY > 24);
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }catch(e){}
+})();
+
+(function(){
+  try{
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var detailsList = Array.prototype.slice.call(document.querySelectorAll('details.sublist'));
+
+    detailsList.forEach(function(details){
+      var summary = details.querySelector('summary');
+      var content = details.querySelector('.hymn-lyrics, .photo-order-body');
+      if(!summary || !content) return;
+
+      summary.addEventListener('click', function(e){
+        e.preventDefault();
+        if(details.hasAttribute('data-animating')) return;
+
+        if(reduceMotion){
+          details.open = !details.open;
+          return;
+        }
+
+        if(!details.open){
+          details.setAttribute('data-animating', '1');
+          details.open = true;
+          var targetHeight = content.scrollHeight;
+          content.style.height = '0px';
+          content.style.opacity = '0';
+          requestAnimationFrame(function(){
+            content.style.transition = 'height .32s cubic-bezier(.4,0,.2,1), opacity .28s ease';
+            content.style.height = targetHeight + 'px';
+            content.style.opacity = '1';
+          });
+          content.addEventListener('transitionend', function te(){
+            content.style.transition = '';
+            content.style.height = '';
+            content.style.opacity = '';
+            details.removeAttribute('data-animating');
+            content.removeEventListener('transitionend', te);
+          }, { once: true });
+        } else {
+          details.setAttribute('data-animating', '1');
+          var startHeight = content.scrollHeight;
+          content.style.height = startHeight + 'px';
+          content.style.opacity = '1';
+          requestAnimationFrame(function(){
+            content.style.transition = 'height .28s cubic-bezier(.4,0,.2,1), opacity .2s ease';
+            content.style.height = '0px';
+            content.style.opacity = '0';
+          });
+          content.addEventListener('transitionend', function te(){
+            details.open = false;
+            content.style.transition = '';
+            content.style.height = '';
+            content.style.opacity = '';
+            details.removeAttribute('data-animating');
+            content.removeEventListener('transitionend', te);
+          }, { once: true });
+        }
+      });
+    });
   }catch(e){}
 })();
 
