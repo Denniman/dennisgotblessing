@@ -7,6 +7,10 @@
 <meta name="theme-color" content="#FBF6EA">
 <title>Dennis & Blessing — Wedding Programme</title>
 
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://denniman.github.io/dennisgotblessing/">
 <meta property="og:title" content="Dennis &amp; Blessing — Wedding Programme">
@@ -154,6 +158,44 @@
   }
   .navlinks a:active{transform:scale(0.94);}
 
+  .share-btn{
+    flex:0 0 auto;
+    width:34px;height:34px;
+    margin-left:2px;
+    border-radius:50%;
+    border:1px solid var(--gold);
+    background:var(--paper);
+    color:var(--olive-deep);
+    display:flex;align-items:center;justify-content:center;
+    padding:0;
+    cursor:pointer;
+    transition:transform .15s ease;
+  }
+  .share-btn:active{transform:scale(0.88);}
+
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:calc(24px + env(safe-area-inset-bottom, 0px));
+    transform:translateX(-50%) translateY(12px);
+    background:var(--olive-deep);
+    color:var(--ivory);
+    font-size:13px;
+    font-weight:700;
+    padding:10px 20px;
+    border-radius:999px;
+    box-shadow:0 14px 34px -16px rgba(0,0,0,0.5);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
+    z-index:200;
+    white-space:nowrap;
+  }
+  .toast.is-visible{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
   /* ---------- hero ---------- */
   .hero{
     padding-block:38px 0;
@@ -185,6 +227,75 @@
     color:var(--ink-soft);
   }
   .hero-date strong{color:var(--ink);font-weight:700;}
+
+  /* ---------- countdown ---------- */
+  .cd-caption{
+    margin-top:26px;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:700;
+  }
+  .countdown{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    gap:7px;
+    margin-top:14px;
+  }
+  .cd-tile{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:3px;
+    padding:10px 11px 9px;
+    background:var(--paper);
+    border:1px solid var(--gold);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+  }
+  .cd-num{
+    display:block;
+    font-family:"Cormorant Garamond",serif;
+    font-weight:700;
+    font-size:26px;
+    line-height:1;
+    color:var(--olive-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-label{
+    font-size:9px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:700;
+  }
+  .cd-sep{
+    align-self:center;
+    margin-top:-13px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:20px;
+    font-weight:600;
+    color:var(--gold);
+    animation:cd-blink 1.6s steps(1) infinite;
+  }
+  @keyframes cd-blink{
+    0%, 45%{opacity:1;}
+    50%, 95%{opacity:0.25;}
+    100%{opacity:1;}
+  }
+  .cd-message{
+    margin-top:22px;
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:21px;
+    color:var(--olive-deep);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cd-sep{animation:none;}
+  }
 
   .flourish{
     display:flex;align-items:center;gap:10px;
@@ -485,6 +596,23 @@
   }
   .directions:active{transform:scale(0.96); opacity:0.75;}
 
+  .add-cal{
+    display:inline-block;
+    background:none;
+    border:0;
+    padding:0;
+    padding-bottom:1px;
+    font:inherit;
+    font-size:13px;
+    font-weight:700;
+    color:var(--olive);
+    text-decoration:none;
+    border-bottom:1px solid currentColor;
+    cursor:pointer;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .add-cal:active{transform:scale(0.96); opacity:0.75;}
+
   /* ---------- order of service ---------- */
   .order-list{
     list-style:none;
@@ -722,6 +850,37 @@
     html{scroll-behavior:auto;}
     *{transition:none !important;}
   }
+
+  /* ---------- print ---------- */
+  @media print{
+    .navbar, .toast, .lightbox, .share-btn, .add-cal, .directions,
+    .cd-caption, #countdown, .cd-message{
+      display:none !important;
+    }
+    body{
+      background:#fff;
+      color:#000;
+      padding-top:0;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .card, .photo-frame, .timeline-panel{ box-shadow:none !important; }
+    .card, .block, .timeline-panel, .gallery-grid figure, .hero-photo{
+      break-inside:avoid;
+    }
+    section + section{ margin-top:30px; }
+    .timeline-panel{
+      background:#fff !important;
+      border:1px solid var(--hairline);
+    }
+    .subhead.on-dark{ color:var(--olive-deep) !important; }
+    .timeline::before{ background:var(--hairline) !important; }
+    .t-time{ color:var(--olive-deep) !important; }
+    .t-dot{ background:var(--orange) !important; border-color:#fff !important; }
+    .t-label{ color:#000 !important; }
+    details.sublist summary{ display:none !important; }
+    details.sublist > *:not(summary){ display:block !important; }
+    .gallery-grid .photo-frame:nth-child(even){ margin-top:0; }
+  }
 </style>
 </head>
 <body>
@@ -736,7 +895,16 @@
     <a href="#reception" data-sec="reception">Reception</a>
     <a href="#thanks" data-sec="thanks">Thanks</a>
   </div>
+  <button type="button" class="share-btn" id="shareBtn" aria-label="Share this page">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3v12"/>
+      <path d="M7 8l5-5 5 5"/>
+      <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>
+    </svg>
+  </button>
 </nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div class="wrap">
 
@@ -744,6 +912,18 @@
     <div class="eyebrow">The Wedding Of</div>
     <h1 class="names">Blessing <span class="amp">&amp;</span> Dennis</h1>
     <div class="hero-date"><strong>Saturday, 26th September 2026</strong></div>
+
+    <div class="cd-caption" id="cdCaption">Counting Down To Our Big Day</div>
+    <div class="countdown" id="countdown">
+      <div class="cd-tile"><span class="cd-num" id="cdDays">00</span><span class="cd-label">Days</span></div>
+      <span class="cd-sep" aria-hidden="true">:</span>
+      <div class="cd-tile"><span class="cd-num" id="cdHours">00</span><span class="cd-label">Hrs</span></div>
+      <span class="cd-sep" aria-hidden="true">:</span>
+      <div class="cd-tile"><span class="cd-num" id="cdMins">00</span><span class="cd-label">Min</span></div>
+      <span class="cd-sep" aria-hidden="true">:</span>
+      <div class="cd-tile"><span class="cd-num" id="cdSecs">00</span><span class="cd-label">Sec</span></div>
+    </div>
+    <p class="cd-message" id="cdMessage" hidden></p>
 
     <div class="flourish" aria-hidden="true">
       <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 0 L9 5 L14 7 L9 9 L7 14 L5 9 L0 7 L5 5 Z" fill="currentColor"/></svg>
@@ -814,6 +994,7 @@
           <div class="venue-meta">
             <span class="time-tag">10:30 AM prompt</span>
             <a class="directions" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=RCCG+Chapel+of+Praise%2C+Region+27+HQ%2C+Along+Sani+Abacha+Expressway%2C+Yenagoa">Get directions →</a>
+            <button type="button" class="add-cal" data-event="ceremony">+ Add to Calendar</button>
           </div>
         </div>
       </div>
@@ -929,6 +1110,7 @@
           <div class="venue-meta">
             <span class="time-tag">1:00 PM prompt</span>
             <a class="directions" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Veroniya+Event+Center%2C+Silver+Bird+Road%2C+Swali%2C+Yenagoa">Get directions →</a>
+            <button type="button" class="add-cal" data-event="reception">+ Add to Calendar</button>
           </div>
         </div>
       </div>
@@ -982,6 +1164,175 @@
 </div>
 
 <script>
+(function(){
+  try{
+    var EVENTS = {
+      ceremony: {
+        title: "Dennis & Blessing's Wedding Ceremony",
+        start: new Date('2026-09-26T10:30:00+01:00'),
+        end: new Date('2026-09-26T13:00:00+01:00'),
+        location: 'RCCG Chapel of Praise, Region 27 HQ, Along Sani Abacha Expressway, Yenagoa',
+        description: "Join us as we celebrate the wedding of Dennis & Blessing. #DennisGotHisBlessing2026"
+      },
+      reception: {
+        title: "Dennis & Blessing's Wedding Reception",
+        start: new Date('2026-09-26T13:00:00+01:00'),
+        end: new Date('2026-09-26T17:00:00+01:00'),
+        location: 'Veroniya Event Center, Silver Bird Road, Swali, Yenagoa',
+        description: "Join us for the reception celebrating Dennis & Blessing. #DennisGotHisBlessing2026"
+      }
+    };
+
+    function pad2(n){ return n < 10 ? '0' + n : '' + n; }
+    function toICSDate(d){
+      return d.getUTCFullYear() + pad2(d.getUTCMonth()+1) + pad2(d.getUTCDate()) + 'T' +
+             pad2(d.getUTCHours()) + pad2(d.getUTCMinutes()) + pad2(d.getUTCSeconds()) + 'Z';
+    }
+    function escapeICS(s){
+      return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+    }
+    function buildICS(ev){
+      return [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Dennis and Blessing Wedding//EN',
+        'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        'UID:' + Date.now() + '-' + Math.random().toString(36).slice(2) + '@dennisgotblessing',
+        'DTSTAMP:' + toICSDate(new Date()),
+        'DTSTART:' + toICSDate(ev.start),
+        'DTEND:' + toICSDate(ev.end),
+        'SUMMARY:' + escapeICS(ev.title),
+        'LOCATION:' + escapeICS(ev.location),
+        'DESCRIPTION:' + escapeICS(ev.description),
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+    }
+
+    var calButtons = Array.prototype.slice.call(document.querySelectorAll('.add-cal'));
+    calButtons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var ev = EVENTS[btn.dataset.event];
+        if(!ev) return;
+        var ics = buildICS(ev);
+        var blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = btn.dataset.event + '-dennis-and-blessing.ics';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+      });
+    });
+  }catch(e){}
+})();
+
+(function(){
+  try{
+    var btn = document.getElementById('shareBtn');
+    var toast = document.getElementById('toast');
+    if(!btn) return;
+
+    var shareData = {
+      title: 'Dennis & Blessing — Wedding Programme',
+      text: "You're invited! Join us for Dennis & Blessing's wedding on Saturday, 26th September 2026. #DennisGotHisBlessing2026",
+      url: 'https://denniman.github.io/dennisgotblessing/'
+    };
+
+    function showToast(text){
+      if(!toast) return;
+      toast.textContent = text;
+      toast.classList.add('is-visible');
+      setTimeout(function(){ toast.classList.remove('is-visible'); }, 1800);
+    }
+
+    btn.addEventListener('click', function(){
+      if(navigator.share){
+        navigator.share(shareData).catch(function(){});
+      } else if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(shareData.url).then(function(){
+          showToast('Link copied!');
+        }).catch(function(){
+          window.prompt('Copy this link:', shareData.url);
+        });
+      } else {
+        window.prompt('Copy this link:', shareData.url);
+      }
+    });
+  }catch(e){}
+})();
+
+(function(){
+  try{
+    var wrap = document.getElementById('countdown');
+    var caption = document.getElementById('cdCaption');
+    var message = document.getElementById('cdMessage');
+    if(!wrap) throw new Error('no countdown');
+
+    var nums = {
+      d: document.getElementById('cdDays'),
+      h: document.getElementById('cdHours'),
+      m: document.getElementById('cdMins'),
+      s: document.getElementById('cdSecs')
+    };
+
+    var TARGET = new Date('2026-09-26T10:30:00+01:00').getTime();
+    var DAY_END = new Date('2026-09-27T00:00:00+01:00').getTime();
+    var prev = { d: null, h: null, m: null, s: null };
+    var timer = null;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var tickFrames = [
+      { transform: 'translateY(-7px)', opacity: 0 },
+      { transform: 'translateY(2px)', opacity: 1, offset: 0.55 },
+      { transform: 'translateY(0)', opacity: 1 }
+    ];
+
+    function pad(n){ return n < 10 ? '0' + n : String(n); }
+
+    function setNum(el, key, value){
+      var str = pad(value);
+      if(prev[key] !== str){
+        el.textContent = str;
+        prev[key] = str;
+        if(!reduceMotion && el.animate){
+          el.animate(tickFrames, { duration: 450, easing: 'cubic-bezier(.2,.8,.2,1)' });
+        }
+      }
+    }
+
+    function showMessage(text){
+      wrap.hidden = true;
+      if(caption) caption.hidden = true;
+      message.hidden = false;
+      message.textContent = text;
+    }
+
+    function render(){
+      var now = Date.now();
+      var diff = TARGET - now;
+
+      if(diff > 0){
+        var totalSec = Math.floor(diff / 1000);
+        setNum(nums.d, 'd', Math.floor(totalSec / 86400));
+        setNum(nums.h, 'h', Math.floor((totalSec % 86400) / 3600));
+        setNum(nums.m, 'm', Math.floor((totalSec % 3600) / 60));
+        setNum(nums.s, 's', totalSec % 60);
+      } else if(now < DAY_END){
+        showMessage("Today's the day! 🎉");
+      } else {
+        showMessage('Married since 26th September 2026');
+        if(timer) clearInterval(timer);
+      }
+    }
+
+    render();
+    timer = setInterval(render, 1000);
+  }catch(e){}
+})();
+
 (function(){
   try{
     var navlinks = document.getElementById('navlinks');
